@@ -30,6 +30,11 @@ template<typename T> struct binary_indexed_tree {
         return l > r ? T{} : sum(r) - sum(l);
     }
 
+    // Returns the value at index i
+    T get(int i) const {
+        return sum(i, i + 1);
+    }
+
     /*
      * Returns the first i in [0, S] such that comp(sum(i)) is true.
      * Returns -1 if no such i exists.
