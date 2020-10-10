@@ -3,7 +3,7 @@ template<typename v_t = long long> struct frac {
     frac(v_t _n, v_t _d = 1) : n(_n), d(_d) {
         assert(n != 0 || d != 0);
         if (d < 0) { n *= -1; d *= -1; }
-        v_t g = __gcd(abs(n), d);
+        v_t g = gcd(abs(n), d);
         n /= g;
         d /= g;
     }

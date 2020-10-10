@@ -78,7 +78,7 @@ template<v_t MOD> struct modnum {
         }
         if (tmp > 1) tot_pr.push_back(tmp);
 
-        for (v_t r = 2; r < MOD; r++) if (__gcd(r, MOD) == 1) {
+        for (v_t r = 2; r < MOD; r++) if (gcd(r, MOD) == 1) {
             bool root = true;
             for (v_t p : tot_pr) root &= modnum(r).pow(tot / p) != 1;
             if (root) return r;
