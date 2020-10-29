@@ -41,7 +41,7 @@ template<typename T> struct binary_indexed_tree {
      * Requires that comp(sum(i)) is non-decreasing in i.
      * The empty prefix is considered to have sum equal to T().
      */
-    int lower_bound(const auto& comp) const {
+    template<typename C> int lower_bound(const C &comp) const {
         T cur = T{};
         if (comp(cur)) return 0;
 
