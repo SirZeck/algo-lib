@@ -85,16 +85,17 @@ template<typename T> struct point {
         return o << " }";
     }
 
-    string classify(const polygon& p) const {
+    enum class Classification { in, out, on };
+    Classification classify(const polygon& p) const {
         bool ans = 0;
-        for (int i = 0; i < p.size(); i++) {
+        for (int i = 0; i < sz(p); i++) {
             point<T> a = p[i], b = p[(i + 1) % p.size()];
             if (cross(a, b, *this) == 0 && min(a, b) <= *this && *this <= max(a, b))
-                return "on";
+                return Classification::on;
             if (a.y > b.y) swap(a, b);
             if (a.y <= y && y < b.y && cross(*this, a, b) > 0) ans ^= 1;
         }
-        return ans ? "in" : "out";
+        return ans ? Classification::in : Classification::out;
     }
 
     friend polygon convex_hull(const vector<point>& pts) {
