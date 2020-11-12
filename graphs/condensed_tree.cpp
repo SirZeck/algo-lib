@@ -4,7 +4,7 @@ template<typename E> struct condensed_tree {
 
     condensed_tree(const lowest_common_ancestor<E>& _t, vi points_of_interest,
             int _root = -1) : t(_t), label(_t.t.V, -1), interesting(_t.t.V, 0), root(_root), L(0) {
-        sort_by(points_of_interest, t.first_visit[a] < t.first_visit[b]);
+        sort(all(points_of_interest), [&](const int &a, const int &b) { return t.first_visit[a] < t.first_visit[b]; });
         unique(all(points_of_interest));
         for (int i = 0; i < sz(points_of_interest); i++) {
             interesting[points_of_interest[i]] = true;

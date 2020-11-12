@@ -59,7 +59,7 @@ template<typename E> struct tree {
 
         traverse(root);
         for (int u = 0; u < V; u++) {
-            sort_by(nbrs[u], subt_sz[a(u)] > subt_sz[b(u)]);
+            sort(all(nbrs[u]), [&](const auto &a, const auto &b) { return subt_sz[a(u)] > subt_sz[b(u)]; });
             children[u].clear();
             copy(nbrs[u].begin() + (u != root), nbrs[u].end(), back_inserter(children[u]));
         }
