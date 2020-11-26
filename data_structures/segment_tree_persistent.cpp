@@ -1,40 +1,78 @@
 template<typename T, typename F, typename I = int>
 struct segment_tree_persistent {
-    int SZ;
-    T id; F tt;
-    vector<vector<pair<I, T>>> table;
+    struct node {
+        T val;
+        int left, right;
+    };
+    struct snapshot {
+        I when;
+        int root;
+        int data_size;
+        bool operator < (const snapshot &o) const { return when < o.when; }
+    };
 
-    segment_tree_persistent(int SZ_, T id_, F tt_) : SZ(SZ_), id(id_), tt(tt_) {
-        table.resize(2 * SZ);
+    int SZ; T tid; F tt;
+    vector<node> data;
+    vector<snapshot> history;
+
+    segment_tree_persistent() {}
+    segment_tree_persistent(int SZ_, T tid_, F tt_) : tid(tid_), tt(tt_) {
+        SZ = 1 << (32 - __builtin_clz(SZ_ - 1));
+
+        data.push_back({ tid, -1, -1 });
+        for (int loc = 1; loc <= __builtin_ctz(SZ); loc++)
+            data.push_back({ tt(data[loc - 1].val, data[loc - 1].val), loc - 1, loc - 1 });
+
+        history.push_back({ numeric_limits<I>::min(), int(data.size()) - 1, int(data.size()) });
     }
 
-    T __get(int i) const { return table[i].empty() ? id : table[i].back().s; }
+    void replace           (int i, T val, I when) { __modify_leaf(i, val, when, true ); }
+    void combine_and_assign(int i, T val, I when) { __modify_leaf(i, val, when, false); }
 
-    // Reads table entry i as it was before moment w (excluding updates with w' >= w)
-    T __get(int i, I w) const {
-        static auto cmp = [](const pair<I, T>& a, const pair<I, T>& b) { return a.f < b.f; };
-        auto it = lb(all(table[i]), mp(w, id), cmp);
-        return it != table[i].begin() ? prev(it)->s : id;
+    void __modify_leaf(int i, T v, I w, bool replace) {
+        assert(0 <= i && i < SZ && history.back().when <= w);
+
+        int current_root = history.back().root;
+        if (history.back().when == w) history.pop_back();
+
+        int immutable = history.back().data_size;
+        int updated_root = __modify_leaf(i, v, current_root, 0, SZ, immutable, replace);
+        history.push_back({ w, updated_root, int(data.size()) });
     }
-
-    I w_last = numeric_limits<I>::min();
-    // Replaces the element at index i with v during moment w
-    void replace(int i, T v, I w) {
-        assert(w >= w_last), w_last = w;
-        table[i += SZ].eb(w, v);
-        for (i /= 2; i; i /= 2) {
-            table[i].eb(w, tt(__get(2 * i), __get(2 * i + 1)));
+    int __modify_leaf(int i, T v, int loc, int L, int R, int immutable, bool replace) {
+        node updated;
+        if (R - L == 1) {
+            updated = { replace ? v : tt(data[loc].val, v), -1, -1 };
+        } else {
+            int M = L + (R - L) / 2;
+            int left  = i <  M ? __modify_leaf(i, v, data[loc].left,  L, M, immutable, replace) : data[loc].left;
+            int right = M <= i ? __modify_leaf(i, v, data[loc].right, M, R, immutable, replace) : data[loc].right;
+            updated = { tt(data[left].val, data[right].val), left, right };
         }
+        if (loc < immutable) {
+            loc = int(data.size());
+            data.push_back(updated);
+        } else {
+            data[loc] = updated;
+        }
+        return loc;
     }
 
     // Accumulates the elements at indices in [i, j) as they were before moment w
-    T operator()(int i, int j, I w) const {
-        T left = id, right = id;
-        for (i += SZ, j += SZ; i < j; i /= 2, j /= 2) {
-            if (i&1) left = tt(left, __get(i++, w));
-            if (j&1) right = tt(__get(--j, w), right);
-        }
-        return tt(left, right);
+    T accumulate(int i, int j, I w) const {
+        if (i >= j) return tid;
+        assert(0 <= i && j <= SZ);
+        int root_before_w = prev(lower_bound(history.begin(), history.end(), snapshot{ w, -1, -1 }))->root;
+        return __accumulate(i, j, tid, root_before_w, 0, SZ);
     }
-    T operator[](int i) const { return __get(SZ + i); }
+    T __accumulate(int i, int j, T init, int loc, int L, int R) const {
+        if (L == i && j == R) {
+            init = tt(init, data[loc].val);
+        } else {
+            int M = L + (R - L) / 2;
+            if (i < M) init = __accumulate(i, min(j, M), init, data[loc].left,  L, M);
+            if (M < j) init = __accumulate(max(i, M), j, init, data[loc].right, M, R);
+        }
+        return init;
+    }
 };
