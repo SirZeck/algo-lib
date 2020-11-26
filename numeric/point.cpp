@@ -133,9 +133,9 @@ template<typename T> struct point {
 
     // sorts by angle CCW from the positive x-axis
     template <typename I> friend void sort_by_angle(I first, I last, const point<T> &origin = point<T>{}) {
-        first = partition(first, last, [&](auto p) { return p == origin; });
-        auto pivot = partition(first, last, [&](auto p) { return p > origin; });
-        auto compare = [&](auto l, auto r) { return compare_by_angle(l, r, origin) < 0; };
+        first = partition(first, last, [&](const point<T> &p) { return p == origin; });
+        auto pivot = partition(first, last, [&](const point<T> &p) { return p > origin; });
+        auto compare = [&](const point<T> &l, const point<T> &r) { return compare_by_angle(l, r, origin) < 0; };
         sort(first, pivot, compare);
         sort(pivot, last, compare);
     }
