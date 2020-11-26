@@ -66,7 +66,9 @@ namespace __input {
 using namespace __input;
 
 namespace __output {
-    template <class T, typename V = decltype(declval<const T &>().begin()), typename S = typename enable_if<!is_same<T, string>::value, bool>::type> void pr(const T &x);
+    template <typename T> struct is_outputtable { template <typename C> static constexpr decltype(declval<ostream &>() << declval<const C &>(), bool()) test(int) { return true; } template <typename C> static constexpr bool test(...) { return false; } static constexpr bool value = test<T>(int()); };
+    template <class T, typename V = decltype(declval<const T &>().begin()), typename S = typename enable_if<!is_outputtable<T>::value, bool>::type> void pr(const T &x);
+
     template <class T, typename V = decltype(declval<ostream &>() << declval<const T &>())> void pr(const T &x) { cout << x; }
     template <class T1, class T2> void pr(const pair<T1, T2> &x);
     template <class Arg, class... Args> void pr(const Arg &first, const Args &...rest) { pr(first); pr(rest...); }
