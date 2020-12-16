@@ -99,7 +99,8 @@ namespace __algorithm {
     template <typename T> size_t index(const vector<T> &v, const T &x) { auto it = find(v, x); assert(it != v.end() && *it == x); return it - v.begin(); }
     template <typename T1, typename T2> typename vector<pair<T1, T2>>::iterator lower_bound(const vector<pair<T1, T2>> &v, const T1 &x) { return lower_bound(all(v), x, [](pair<T1, T2> a, pair<T1, T2> b) { return a.f < b.f; }); }
     template <typename T1, typename T2> typename vector<pair<T1, T2>>::iterator upper_bound(const vector<pair<T1, T2>> &v, const T1 &x) { return upper_bound(all(v), x, [](pair<T1, T2> a, pair<T1, T2> b) { return a.f < b.f; }); }
-    template <typename I, typename B, typename E> struct reversed { I &v_; explicit reversed(I &v) : v_{v} {} B begin() const { return rbegin(v_); } E end() const { return rend(v_); } };
+    template <typename I> struct _reversed_struct { I &v_; explicit _reversed_struct(I &v) : v_{v} {} typename I::reverse_iterator begin() const { return v_.rbegin(); } typename I::reverse_iterator end() const { return v_.rend(); } };
+    template <typename I> _reversed_struct<I> reversed(I &v) { return _reversed_struct<I>(v); }
 }
 using namespace __algorithm;
 
