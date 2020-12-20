@@ -110,8 +110,6 @@ struct __monostate {
 } ms;
 
 namespace __io {
-    void setIn(string s) { freopen(s.c_str(), "r", stdin); }
-    void setOut(string s) { freopen(s.c_str(), "w", stdout); }
     void setIO() { ios_base::sync_with_stdio(0); cin.tie(0); cout << setprecision(15); }
 }
 using namespace __io;
