@@ -9,7 +9,7 @@ int main() {
     int N, Q;
     scanf("%d %d", &N, &Q);
 
-    binary_indexed_tree<int64_t, std::plus<int64_t>> bit(N, 0, std::plus<int64_t>());
+    binary_indexed_tree<int64_t, std::plus<int64_t>, std::minus<int64_t>> bit(N, 0, std::plus<int64_t>(), std::minus<int64_t>());
 
     for (int i = 0; i < N; i++) {
         int a;
@@ -27,7 +27,7 @@ int main() {
         } else {
             int l, r;
             scanf("%d %d", &l, &r);
-            printf("%ld\n", bit.accumulate_prefix(r) - bit.accumulate_prefix(l));
+            printf("%ld\n", bit.accumulate(l, r));
         }
     }
 }
