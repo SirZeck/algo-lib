@@ -1,3 +1,5 @@
+This is a fork of [saketh-are/algo-lib](https://github.com/saketh-are/algo-lib), with a few changes according to my personal preferences.
+
 [![CircleCI](https://circleci.com/gh/anandoza/algo-lib.svg?style=shield)](https://circleci.com/gh/anandoza/algo-lib)
 
 ## Contents
