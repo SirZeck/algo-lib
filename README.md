@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/saketh-are/algo-lib.svg?style=shield)](https://circleci.com/gh/saketh-are/algo-lib)
+[![CircleCI](https://circleci.com/gh/anandoza/algo-lib.svg?style=shield)](https://circleci.com/gh/anandoza/algo-lib)
 
 ## Contents
 * [Usage](#usage)
