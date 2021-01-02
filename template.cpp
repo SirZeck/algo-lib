@@ -6,21 +6,12 @@ using namespace std;
 #define pb push_back
 #define eb emplace_back
 #define mp make_pair
-#define mt make_tuple
-#define lb lower_bound
-#define ub upper_bound
 #define f first
 #define s second
-#define resz resize
 
 #define sz(x) int((x).size())
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
-
-#define FOR(i, a, b) for (int i = (a); i < (b); i++)
-#define F0R(i, a) for (int i = 0; i < (a); i++)
-#define FORd(i, a, b) for (int i = (b)-1; i >= (a); i--)
-#define F0Rd(i, a) for (int i = (a)-1; i >= 0; i--)
 #define trav(a, x) for (auto &a : x)
 
 #define L1(u, ...) [&](auto &&u) { return __VA_ARGS__; }
@@ -34,6 +25,7 @@ using vvi = vector<vi>;
 using vll = vector<ll>;
 using vvll = vector<vll>;
 using vb = vector<bool>;
+using vvb = vector<vb>;
 using vd = vector<double>;
 using vs = vector<string>;
 
@@ -60,8 +52,8 @@ namespace __input {
     template <class Arg, class... Args> void re(Arg &first, Args &...rest) { re(first); re(rest...); }
 
     template <class T1, class T2> void re(pair<T1, T2> &p) { re(p.f, p.s); }
-    template <class T> void re(vector<T> &a) { F0R (i, sz(a)) re(a[i]); }
-    template <class T, size_t SZ> void re(array<T, SZ> &a) { F0R (i, SZ) re(a[i]); }
+    template <class T> void re(vector<T> &a) { for (int i = 0; i < sz(a); i++) re(a[i]); }
+    template <class T, size_t SZ> void re(array<T, SZ> &a) { for (int i = 0; i < SZ; i++) re(a[i]); }
 }
 using namespace __input;
 
@@ -85,7 +77,6 @@ namespace __output {
 }
 using namespace __output;
 
-#define TRACE(x) x
 #define __pn(x) pr(#x, " = ")
 #ifdef ANAND_LOCAL
 #define pd(...) pr("\033[1;31m"), __pn((__VA_ARGS__)), ps(__VA_ARGS__), pr("\033[0m"), cout << flush
@@ -97,17 +88,10 @@ namespace __algorithm {
     template <typename T> void dedup(vector<T> &v) { sort(all(v)); v.erase(unique(all(v)), v.end()); }
     template <typename T> typename vector<T>::const_iterator find(const vector<T> &v, const T &x) { auto it = lower_bound(all(v), x); return it != v.end() && *it == x ? it : v.end(); }
     template <typename T> size_t index(const vector<T> &v, const T &x) { auto it = find(v, x); assert(it != v.end() && *it == x); return it - v.begin(); }
-    template <typename T1, typename T2> typename vector<pair<T1, T2>>::iterator lower_bound(const vector<pair<T1, T2>> &v, const T1 &x) { return lower_bound(all(v), x, [](pair<T1, T2> a, pair<T1, T2> b) { return a.f < b.f; }); }
-    template <typename T1, typename T2> typename vector<pair<T1, T2>>::iterator upper_bound(const vector<pair<T1, T2>> &v, const T1 &x) { return upper_bound(all(v), x, [](pair<T1, T2> a, pair<T1, T2> b) { return a.f < b.f; }); }
     template <typename I> struct _reversed_struct { I &v_; explicit _reversed_struct(I &v) : v_{v} {} typename I::reverse_iterator begin() const { return v_.rbegin(); } typename I::reverse_iterator end() const { return v_.rend(); } };
     template <typename I> _reversed_struct<I> reversed(I &v) { return _reversed_struct<I>(v); }
 }
 using namespace __algorithm;
-
-struct __monostate {
-    friend istream &operator>>(istream &is, const __attribute__((unused)) __monostate &ms) { return is; }
-    friend ostream &operator<<(ostream &os, const __attribute__((unused)) __monostate &ms) { return os; }
-} ms;
 
 namespace __io {
     void setIO() { ios_base::sync_with_stdio(0); cin.tie(0); cout << setprecision(15); }
