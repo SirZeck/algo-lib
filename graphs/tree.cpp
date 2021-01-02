@@ -31,7 +31,7 @@ struct tree {
     int V, root;
     std::vector<std::vector<Edge>> neighbors;
 
-    std::vector<int> parent, depth, subtree_size, preorder, reverse_preorder;
+    std::vector<int> parent, depth, subtree_size, preorder;
 
     tree() : V(0), root(-1) {}
 
@@ -94,9 +94,6 @@ struct tree {
 
         preorder.clear();
         build_preorder(root);
-
-        reverse_preorder = preorder;
-        std::reverse(reverse_preorder.begin(), reverse_preorder.end());
     }
 
     void traverse(int u) {
