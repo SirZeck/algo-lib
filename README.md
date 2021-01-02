@@ -9,11 +9,13 @@ This is a fork of [saketh-are/algo-lib](https://github.com/saketh-are/algo-lib),
 * [Data Structures](#data-structures)
   * [Union Find](#union-find)
   * [Union Find (Bipartite)](#union-find-bipartite)
+  * [Union Find (Rewindable)](#union-find-rewindable)
   * [Segment Tree](#segment-tree)
   * [Segment Tree (Lazy Propagation)](README.md#segment-tree-lazy-propagation)
   * [Segment Tree (Persistent)](README.md#segment-tree-persistent)
   * [Binary Indexed Tree](#binary-indexed-tree)
   * [Sparse Table](#sparse-table)
+  * [Static to Dynamic Transformation](#static-to-dynamic-transformation)
 * [Graphs](#graphs)
   * [Tree](#tree)
   * [Lowest Common Ancestor](#lowest-common-ancestor)
@@ -140,6 +142,17 @@ Amortized runtime complexity is near constant for all operations.
  __Usage Examples:__
 * [Prefix Enlightenment](test/data_structures/union_find_bipartite/prefix_enlightenment/prefix_enlightenment.cpp)
 
+### [Union Find (Rewindable)](data_structures/union_find_rewindable.cpp)
+Maintains a partition of the set `{0, 1, ..., N-1}` supporting:
+* Retrieval of an identifier for the subset containing a specified element in `O(log(N))`
+* Replacement of two specified subsets with their union in `O(1)`
+* Reversion of the most recent "union" operation in `O(1)`
+
+Can process a sequence of `E` edge insertions and deletions in `O(E log(E) log(N))`.
+
+ __Usage Examples:__
+* [Connect and Disconnect](test/data_structures/union_find_bipartite/connect_and_disconnect/connect_and_disconnect.cpp)
+
 ### [Segment Tree](data_structures/segment_tree.cpp)
 Maintains an array of `N` elements supporting:
 * Modification of a specific element in `O(log(N))`
@@ -184,10 +197,18 @@ Less general than a [Segment Tree](#segment-tree); offers better constant factor
 Accepts a static array of `N` elements and an idempotent binary operation `f`. Supports:
 * Accumulation of a range of elements in `O(1)`
 
-Precomputation is `O(N log(N)`. Typically used with `f = min<T>` or `f = max<T>`.
+Precomputation is `O(N log(N))`. Typically used with `f = min<T>` or `f = max<T>`.
 
  __Usage Examples:__
 * [Static RMQ](test/data_structures/sparse_table/static_rmq/static_rmq.cpp)
+
+### [Static to Dynamic Transformation](data_structures/static_to_dynamic_transformation.cpp)
+Adds the ability to insert new elements into a static data structure. Requires that queries to the data structure are decomposable; for any pair of disjoint sets of elements, the answer to a query over their union must be computable from answers to the query over the individual sets.
+
+Over a sequence of `N` insertions, the K-th most recently inserted element is involved in `log(K)` constructions of the static data structure. A query made after `N` elements have been inserted is decomposed into `log(N)` queries on disjoint subsets of the inserted elements.
+
+ __Usage Examples:__
+* [String Set Queries](test/data_structures/static_to_dynamic_transformation/string_set_queries/string_set_queries.cpp)
 
 ## Graphs
 
@@ -401,4 +422,3 @@ Maintains a string over a finite alphabet, supporting:
 
 __Usage Examples:__
 * [Count Matches in Mutable Text](test/strings/mutable_string_bitset/count_matches_in_mutable_text/count_matches_in_mutable_text.cpp)
-
