@@ -31,7 +31,7 @@ struct tree {
     int V, root;
     std::vector<std::vector<Edge>> neighbors;
 
-    std::vector<int> parent, depth, subtree_size, preorder;
+    std::vector<int> parent, depth, subtree_size, preorder, preorder_index;
 
     tree() : V(0), root(-1) {}
 
@@ -79,7 +79,7 @@ struct tree {
     }
 
     void init() {
-        parent.resize(V), depth.resize(V), subtree_size.resize(V);
+        parent.resize(V), depth.resize(V), subtree_size.resize(V), preorder_index.resize(V);
 
         parent[root] = -1;
         depth[root] = 0;
@@ -110,6 +110,7 @@ struct tree {
     }
 
     void build_preorder(int u) {
+        preorder_index[u] = preorder.size();
         preorder.push_back(u);
         for_each_child(u, [&](Edge e) { build_preorder(e.get_nbr(u)); });
     }
