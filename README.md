@@ -13,8 +13,11 @@ This is a fork of [saketh-are/algo-lib](https://github.com/saketh-are/algo-lib),
   * [Segment Tree](#segment-tree)
   * [Segment Tree (Lazy Propagation)](README.md#segment-tree-lazy-propagation)
   * [Segment Tree (Persistent)](README.md#segment-tree-persistent)
+  * [Segment Tree (Searchable)](README.md#segment-tree-searchable)
   * [Binary Indexed Tree](#binary-indexed-tree)
   * [Sparse Table](#sparse-table)
+  * [Line Container](#line-container)
+  * [Line Container (Monotonic)](#line-container-monotonic)
   * [Static to Dynamic Transformation](#static-to-dynamic-transformation)
 * [Graphs](#graphs)
   * [Tree](#tree)
@@ -31,6 +34,7 @@ This is a fork of [saketh-are/algo-lib](https://github.com/saketh-are/algo-lib),
   * [Complex FFT](#complex-fft)
   * [Discrete Logarithm](#discrete-logarithm)
   * [Tonelli-Shanks](#tonelli-shanks)
+  * [BigNum (Add Power of 2, Compare)](#bignum-add-power-of-2-compare)
 * [Strings](#strings)
   * [Knuth-Morris-Pratt](#knuth-morris-pratt)
   * [Z Algorithm](#z-algorithm)
@@ -183,6 +187,14 @@ Consumes `O(log(N))` additional memory on each write.
  __Usage Examples:__
 * [K-Query](test/data_structures/segment_tree_persistent/k-query/k-query.cpp)
 
+### [Segment Tree (Searchable)](data_structures/segment_tree_searchable.cpp)
+Adds a binary search feature to the Segment Tree class which accepts an index `first` and a predicate `p`, returning the first index `last` such that `p(accumulate(first, last))` evaluates to true. Requires that the predicate is non-decreasing as `last` increases.
+
+Rounds up internal size to the next power of 2. For a segment tree over `N` elements, search is `O(log(N))`.
+
+ __Usage Examples:__
+* [Deda](test/data_structures/segment_tree_searchable/deda/deda.cpp)
+
 ### [Binary Indexed Tree](data_structures/binary_indexed_tree.cpp)
 Maintains an array of `N` elements supporting:
 * Modification of a specific element in `O(log(N))`
@@ -201,6 +213,27 @@ Precomputation is `O(N log(N))`. Typically used with `f = min<T>` or `f = max<T>
 
  __Usage Examples:__
 * [Static RMQ](test/data_structures/sparse_table/static_rmq/static_rmq.cpp)
+
+### [Line Container](data_structures/line_container.cpp)
+Maintains a collection of lines. Supports:
+ * Insertion of a line `f(x) = a * x + b`
+ * Querying for the maximum value among all inserted lines at a specified value of `x`
+
+Runtime complexity for both operations is `O(log(container size))`.
+
+ __Usage Examples:__
+* [Escape Through Leaf](test/data_structures/line_container/escape_through_leaf/escape_through_leaf.cpp)
+
+### [Line Container (Monotonic)](data_structures/line_container_monotonic.cpp)
+Maintains a collection of lines. Supports:
+ * Insertion of a line `f(x) = a * x + b`, where `a` is non-decreasing across all insertions
+ * Querying for the maximum value among all inserted lines at a specified value of `x`
+
+Runtime complexity for insertion is amortized `O(1)`. Runtime complexity for arbitrary queries is `O(log(container size))`. If `get_maximum_monotonic` is used, total runtime complexity over a sequence of queries made with non-decreasing `x` is linear. 
+
+ __Usage Examples:__
+* [The Fair Nut and Rectangles](test/data_structures/line_container_monotonic/the_fair_nut_and_rectangles/the_fair_nut_and_rectangles.cpp)
+* [Cats Transport](test/data_structures/line_container_monotonic/cats_transport/cats_transport.cpp)
 
 ### [Static to Dynamic Transformation](data_structures/static_to_dynamic_transformation.cpp)
 Adds the ability to insert new elements into a static data structure. Requires that queries to the data structure are decomposable; for any pair of disjoint sets of elements, the answer to a query over their union must be computable from answers to the query over the individual sets.
@@ -329,6 +362,17 @@ Performs modular arithmetic:
  
  __Usage Examples:__
  * [Sqrt Mod](test/numeric/tonelli-shanks/sqrt_mod/sqrt_mod.cpp)
+ 
+ ### [BigNum (Add Power of 2, Compare)](numeric/bignum_addpow2_compare.cpp)
+ 
+Large integer representation. Starts with a representation of `0` and supports:
+ * Representation of the sum of a represented integer with an arbitrary power of 2
+ * Comparison of two represented integers
+ 
+ Runtime complexity for both operations is logarithmic in the number of digits of precision. Constructing a sum also consumes additional memory logarithmic in the number of digits of precision.
+ 
+ __Usage Examples:__
+ * [The Classic Problem](test/numeric/bignum_addpow2_compare/the_classic_problem/the_classic_problem.cpp)
  
 ## Strings
 
