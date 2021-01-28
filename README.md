@@ -16,6 +16,7 @@ This is a fork of [saketh-are/algo-lib](https://github.com/saketh-are/algo-lib),
   * [Segment Tree (Searchable)](README.md#segment-tree-searchable)
   * [Binary Indexed Tree](#binary-indexed-tree)
   * [Sparse Table](#sparse-table)
+  * [Sqrt Decomposition (Range Update, Point Query)](#sqrt-decomposition-range-update-point-query)
   * [Line Container](#line-container)
   * [Line Container (Monotonic)](#line-container-monotonic)
   * [Static to Dynamic Transformation](#static-to-dynamic-transformation)
@@ -59,7 +60,7 @@ python2 expand_dependencies.py <input path> <output path> <path to repository ro
 ### Passing function objects as arguments
 
 Some functions expect function objects as arguments, typically either:
-* A binary operation used to accumulate stored values (e.g. [segment_tree](data_structures/segment_tree.cpp) 's constructor)
+* A binary operation used to accumulate stored values (e.g. [segment_tree](data_structures/segment_tree.cpp)'s constructor)
 * A unary operation used to initialize a range of elements (e.g. [segment_tree](data_structures/segment_tree.cpp)'s assign)
 
 You can pass a function pointer:
@@ -214,6 +215,14 @@ Precomputation is `O(N log(N))`. Typically used with `f = min<T>` or `f = max<T>
  __Usage Examples:__
 * [Static RMQ](test/data_structures/sparse_table/static_rmq/static_rmq.cpp)
 
+### [Sqrt Decomposition (Range Update, Point Query)](data_structures/sqrt_decomposition_point_query.cpp)
+Maintains an array of `N` elements supporting:
+* Modification of a range of elements in `O(sqrt(N))`
+* Querying the value of a single element in `O(1)`
+
+ __Usage Examples:__
+* [Duff is Mad](test/data_structures/sqrt_decomposition_point_query/duff_is_mad/duff_is_mad.cpp)
+
 ### [Line Container](data_structures/line_container.cpp)
 Maintains a collection of lines. Supports:
  * Insertion of a line `f(x) = a * x + b`
@@ -279,7 +288,7 @@ Accepts an instance of the [Tree](#tree) class. Additional precomputation is `O(
 __Usage Examples:__
 * [Vertex Add Path Sum](test/graphs/heavy_path_decomposition/vertex_add_path_sum/vertex_add_path_sum.cpp)
 
-### [Dijkstra](graphs/tree.cpp)
+### [Dijkstra](graphs/dijkstra.cpp)
 An implementation of Dijkstra's Algorithm for computing shortest path trees.
 
 Runs in `O(V + E log(E))` on a graph with `V` vertices and `E` edges.
@@ -322,7 +331,7 @@ Performs modular arithmetic:
    * Binomial coefficients in `O(1)`
    * Inverses in `O(1)`
 
-`MOD` is configured as a template parameter. If the modulus isn't know at compile-time, move `MOD` inside the struct as a static member.
+`MOD` is configured as a template parameter. If the modulus isn't known at compile-time, move `MOD` inside the struct as a static member.
 
  __Usage Examples:__
  * [Exponentiation](test/numeric/modnum/exponentiation/exponentiation.cpp)
@@ -342,7 +351,7 @@ Performs modular arithmetic:
  
  Convolves polynomials over the field of doubles.
  
- Provides a routine for convolution of polynomials over the integers modulo `P` _without_ [Number Theoretic Transform](numeric/ntt.cpp)'s constraint that `D` divides `P - 1`. This routine seems to be safe for `N,M <= 150,000` but isn't precise enough for some adversarial cases around `N = M = 180,000`.
+ Provides a routine for convolution of polynomials over the integers modulo `P` _without_ [Number Theoretic Transform](#number-theoretic-transform)'s constraint that `D` divides `P - 1`. This routine seems to be safe for `N,M <= 150,000` but isn't precise enough for some adversarial cases around `N = M = 180,000`.
  
  __Usage Examples:__
  * [Convolution Mod 1000000007](test/numeric/complex_fft/convolution_mod_1000000007/convolution_mod_1000000007.cpp)
