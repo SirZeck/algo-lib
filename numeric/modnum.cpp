@@ -146,7 +146,7 @@ template<v_t MOD> struct modnum {
         assert(n >= 0);
         if (int(finv.size()) <= n) {
             int had = finv.size();
-            finv.resz(n + 1), finv[n] = factorial(n).inv();
+            finv.resize(n + 1), finv[n] = factorial(n).inv();
             for (int i = n - 1; i >= had; i--) finv[i] = finv[i+1] * (i+1);
         }
         return finv[n];
