@@ -51,9 +51,9 @@ namespace __input {
     void re(double &x) { string t; re(t); x = stod(t); }
     template <class Arg, class... Args> void re(Arg &first, Args &...rest) { re(first); re(rest...); }
 
-    template <class T1, class T2> void re(pair<T1, T2> &p) { re(p.f, p.s); }
-    template <class T> void re(vector<T> &a) { for (int i = 0; i < sz(a); i++) re(a[i]); }
-    template <class T, size_t SZ> void re(array<T, SZ> &a) { for (int i = 0; i < SZ; i++) re(a[i]); }
+    template <class T1, class T2> void re(pair<T1, T2> &p) { re(p.first, p.second); }
+    template <class T> void re(vector<T> &a) { for (auto &x : a) re(x); }
+    template <class T, size_t SZ> void re(array<T, SZ> &a) { for (auto &x : a) re(x); }
 }
 using namespace __input;
 
@@ -68,7 +68,7 @@ namespace __output {
     template <class T, bool pretty = true> void prContain(const T &x) { if (pretty) pr("{"); bool fst = 1; for (const auto &a : x) pr(!fst ? pretty ? ", " : " " : "", a), fst = 0; if (pretty) pr("}"); }
 
     template <class T> void pc(const T &x) { prContain<T, false>(x); pr("\n"); }
-    template <class T1, class T2> void pr(const pair<T1, T2> &x) { pr("{", x.f, ", ", x.s, "}"); }
+    template <class T1, class T2> void pr(const pair<T1, T2> &x) { pr("{", x.first, ", ", x.second, "}"); }
     template <class T, typename V, typename S> void pr(const T &x) { prContain(x); }
 
     void ps() { pr("\n"); }
