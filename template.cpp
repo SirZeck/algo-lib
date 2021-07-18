@@ -90,6 +90,8 @@ namespace __algorithm {
     template <typename T> size_t index(const vector<T> &v, const T &x) { auto it = find(v, x); assert(it != v.end() && *it == x); return it - v.begin(); }
     template <typename I> struct _reversed_struct { I &v_; explicit _reversed_struct(I &v) : v_{v} {} typename I::reverse_iterator begin() const { return v_.rbegin(); } typename I::reverse_iterator end() const { return v_.rend(); } };
     template <typename I> _reversed_struct<I> reversed(I &v) { return _reversed_struct<I>(v); }
+    template <typename I> struct _range_struct { const I first_, last_; explicit _range_struct(const I first, const I last) : first_{first}, last_{last} {} I begin() const { return first_; } I end() const { return last_; } };
+    template <typename I> _range_struct<I> range(const I first, const I last) { return _range_struct<I>(first, last); }
 }
 using namespace __algorithm;
 
