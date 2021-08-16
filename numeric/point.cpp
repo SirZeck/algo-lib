@@ -136,12 +136,15 @@ struct point {
     friend int compare_by_angle(const point &a, const point &b) { return sign(cross(b, a)); }
     friend int compare_by_angle(const point &a, const point &b, const point &origin) { return sign(cross(origin, b, a)); }
 
-    // sorts by angle CCW from the positive x-axis
+    // sorts by angle CCW from the positive x-axis, breaking ties by distance from origin
     template <typename I> friend void sort_by_angle(I first, I last, const point<T> &origin = point<T>{}) {
-        first = partition(first, last, [&](const point<T> &p) { return p == origin; });
-        auto pivot = partition(first, last, [&](const point<T> &p) { return p.y != origin.y ? p.y > origin.y : p.x > origin.x; });
-        auto compare = [&](const point<T> &l, const point<T> &r) { return compare_by_angle(l, r, origin) < 0; };
+        const point<T> Z{};
+        if (origin != Z) for (auto it = first; it != last; it++) *it -= origin;
+        first = partition(first, last, [&](const point<T> &p) { return p == Z; });
+        auto pivot = partition(first, last, [&](const point<T> &p) { return (p.y != 0) ? (p.y > 0) : (p.x > 0); });
+        auto compare = [&](const point<T> &l, const point<T> &r) { auto angle_result = compare_by_angle(l, r); return (angle_result != 0) ? (angle_result < 0) : (l.norm() < r.norm()); };
         sort(first, pivot, compare);
         sort(pivot, last, compare);
+        if (origin != Z) for (auto it = first; it != last; it++) *it += origin;
     }
 };
