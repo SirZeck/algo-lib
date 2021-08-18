@@ -4,8 +4,8 @@
 
 struct union_find {
     struct node {
-        int parent, rank, size;
-        node (int id = 0) : parent(id), rank(0), size(1) {}
+        int parent, size;
+        node (int id = 0) : parent(id), size(1) {}
     };
 
     mutable std::vector<node> data;
@@ -36,13 +36,11 @@ struct union_find {
         a = find(a), b = find(b);
         if (a == b) return false;
 
-        if (data[a].rank < data[b].rank)
+        if (data[a].size < data[b].size)
             std::swap(a, b);
 
         data[b].parent = a;
         data[a].size += data[b].size;
-        if (data[a].rank == data[b].rank)
-            data[a].rank++;
 
         return true;
     }
@@ -54,8 +52,7 @@ struct union_find {
             if (u.is_root(i)) {
                 if (!first) std::cout << ", ";
                 else first = 0;
-                std::cout << "[ " << i << " | rank=" << u.data[i].rank
-                    << " size=" << u.data[i].size << " ]";
+                std::cout << "[ " << i << " | size=" << u.data[i].size << " ]";
             }
         }
         std::cout << "}";
