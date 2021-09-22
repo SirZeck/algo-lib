@@ -98,6 +98,9 @@ public:
         edge_parity ^= data[v].parent_edge_parity;
         v = data[v].parent;
 
+        if (u == v)
+            return data[u].is_bipartite && edge_parity == 0;
+
         return data[u].is_bipartite && data[v].is_bipartite &&
             (data[u].status == -1 || data[v].status == -1 || (data[u].status ^ data[v].status) == edge_parity);
     }
