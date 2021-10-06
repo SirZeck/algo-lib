@@ -1,3 +1,4 @@
+#include <cassert>
 #include <vector>
 #include <iostream>
 #include <iomanip>
@@ -89,5 +90,13 @@ struct matrix {
             os << "  " << (i ? i < m.N - 1 ? "\u2503" : "\u251B" : "\u2512") << "\n";
         }
         return os;
+    }
+
+    friend std::istream& operator >> (std::istream& is, const matrix<T>& m) {
+        for (int i = 0; i < m.N; i++) {
+            for (int j = 0; j < m.M; j++)
+                is >> m[i][j];
+        }
+        return is;
     }
 };
