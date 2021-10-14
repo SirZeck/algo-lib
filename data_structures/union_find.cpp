@@ -4,28 +4,31 @@
 
 struct union_find {
     struct node {
-        int parent, size;
-        node (int id = 0) : parent(id), size(1) {}
+        int parent_or_size;
+        node () : parent_or_size(-1) {}
     };
 
     mutable std::vector<node> data;
 
-    union_find(int SZ = 0) : data(SZ) {
-        iota(data.begin(), data.end(), 0);
-    }
+    union_find(int SZ = 0) : data(SZ) {}
 
     // Returns the root of the component containing i
     int find(int i) const {
-        if (i != data[i].parent)
-            data[i].parent = find(data[i].parent);
-        return data[i].parent;
+        if (data[i].parent_or_size < 0)
+            return i;
+        data[i].parent_or_size = find(data[i].parent_or_size);
+        return data[i].parent_or_size;
+    }
+
+    int size(int i) const {
+        return -data[find(i)].parent_or_size;
     }
 
     bool is_root(int i) const {
-        return i == find(i);
+        return data[i].parent_or_size < 0;
     }
 
-    node& root_node(int i) const {
+    node& operator[] (int i) const {
         return data[find(i)];
     }
 
@@ -36,11 +39,11 @@ struct union_find {
         a = find(a), b = find(b);
         if (a == b) return false;
 
-        if (data[a].size < data[b].size)
+        if (-data[a].parent_or_size < -data[b].parent_or_size)
             std::swap(a, b);
 
-        data[b].parent = a;
-        data[a].size += data[b].size;
+        data[a].parent_or_size += data[b].parent_or_size;
+        data[b].parent_or_size = a;
 
         return true;
     }
@@ -52,7 +55,7 @@ struct union_find {
             if (u.is_root(i)) {
                 if (!first) std::cout << ", ";
                 else first = 0;
-                std::cout << "[ " << i << " | size=" << u.data[i].size << " ]";
+                std::cout << "[ " << i << " | size=" << u.size(i) << " ]";
             }
         }
         std::cout << "}";
