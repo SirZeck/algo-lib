@@ -9,6 +9,9 @@ struct matrix {
     std::vector<T> data;
 
     matrix(int _N, int _M, T value = T{}) : N(_N), M(_M), data(N * M, value) {}
+    matrix(int _N, int _M, T value, T diag) : N(_N), M(_M), data(N * M, value) {
+        for (int i = 0; i < int(data.size()); i += M + 1) data[i] = diag;
+    }
 
     typename std::vector<T>::iterator operator[](int i) {
         return data.begin() + i * M;
