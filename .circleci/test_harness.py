@@ -23,23 +23,23 @@ class icons:
     MAYBE = colors.YELLOW + '?' + colors.ENDC
 
 def err(message):
-    print colors.BOLD + colors.RED + "ERROR" + colors.ENDC + ": " + message
+    print(colors.BOLD + colors.RED + "ERROR" + colors.ENDC + ": " + message)
     exit(1)
 
 def warn(message):
-    print colors.BOLD + colors.HEADER + "WARN" + colors.ENDC + ": " + message
+    print(colors.BOLD + colors.HEADER + "WARN" + colors.ENDC + ": " + message)
 
 def bold(message):
-    print colors.BOLD + message + colors.ENDC
+    print(colors.BOLD + message + colors.ENDC)
 
 def run(cmd):
     return subprocess.call(['/bin/bash', '-c', cmd])
 
 def build_with_compiler_warnings(filepath, binary_path):
-    return run("g++-8 -std=c++17 -O2 -fconcepts -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align " + filepath + " -o " + binary_path)
+    return run("g++ -std=c++17 -O2 -fconcepts -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align " + filepath + " -o " + binary_path)
 
 def build_with_instrumentation(filepath, binary_path):
-    return run("g++-8 -std=c++17 -O0 -fconcepts -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -g " + filepath + " -o " + binary_path)
+    return run("g++ -std=c++17 -O0 -fconcepts -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -g " + filepath + " -o " + binary_path)
 
 def build_and_run(filepath):
     filepath = canonical_path(filepath)
@@ -71,18 +71,18 @@ def build_and_run(filepath):
         if run("{} < {}.in > {}.my".format(binary_path, sample, sample)):
             err("Run-time error on " + sample)
 
-        print "\nExpected output on {}:".format(sample)
+        print("\nExpected output on {}:".format(sample))
         has_output = True
         try:
             out = open("{}.out".format(sample), 'r').read()
-            print out
+            print(out)
         except IOError:
-            print "File \'{}.out\' not found\n".format(sample)
+            print("File \'{}.out\' not found\n".format(sample))
             has_output = False
 
         my = open("{}.my".format(sample), 'r').read()
-        print "Your output on {}:".format(sample)
-        print my
+        print("Your output on {}:".format(sample))
+        print(my)
 
         if not has_output:
             warn(sample + " failed (missing \'{}.out\')".format(sample))
@@ -136,14 +136,14 @@ def build_and_run(filepath):
                     summary += icons.FAIL
 
     if failed:
-        print
-        print summary + ": FAILED samples " + str(failed)
+        print()
+        print(summary + ": FAILED samples " + str(failed))
     elif not sample_files:
-        print
+        print()
         warn("No sample inputs found in {}".format(test_dir))
     else:
-        print
-        print summary + colors.BOLD + ": ALL SAMPLES OK!" + colors.ENDC
+        print()
+        print(summary + colors.BOLD + ": ALL SAMPLES OK!" + colors.ENDC)
 
     if first_line_has_multiple_tokens:
         warn("First line of input has multiple tokens. Check their order carefully.")

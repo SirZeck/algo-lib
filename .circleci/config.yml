@@ -13,132 +13,132 @@ jobs:
       # DATA STRUCTURES
       - run:
           name: Roads not only in Berland (data_structures/union_find)
-          command: python2 .circleci/run_tests.py test/data_structures/union_find/roads_not_only_in_berland
+          command: python .circleci/run_tests.py test/data_structures/union_find/roads_not_only_in_berland
       - run:
           name: Connect and Disconnect (data_structures/union_find_rewindable)
-          command: python2 .circleci/run_tests.py test/data_structures/union_find_rewindable/connect_and_disconnect
+          command: python .circleci/run_tests.py test/data_structures/union_find_rewindable/connect_and_disconnect
       - run:
           name: Point Add Range Sum (data_structures/segment_tree)
-          command: python2 .circleci/run_tests.py test/data_structures/segment_tree/point_add_range_sum
+          command: python .circleci/run_tests.py test/data_structures/segment_tree/point_add_range_sum
       - run:
           name: Point Add Range Sum (data_structures/binary_indexed_tree)
-          command: python2 .circleci/run_tests.py test/data_structures/binary_indexed_tree/point_add_range_sum
+          command: python .circleci/run_tests.py test/data_structures/binary_indexed_tree/point_add_range_sum
       - run:
           name: Point Set Range Composite (data_structures/segment_tree, numeric/modnum)
-          command: python2 .circleci/run_tests.py test/data_structures/segment_tree/point_set_range_composite
+          command: python .circleci/run_tests.py test/data_structures/segment_tree/point_set_range_composite
       - run:
           name: Distinct Characters Queries (data_structures/segment_tree)
-          command: python2 .circleci/run_tests.py test/data_structures/segment_tree/distinct_characters_queries
+          command: python .circleci/run_tests.py test/data_structures/segment_tree/distinct_characters_queries
       - run:
           name: Range Add Range Min (data_structures/segment_tree_lazy)
-          command: python2 .circleci/run_tests.py test/data_structures/segment_tree_lazy/range_add_range_min
+          command: python .circleci/run_tests.py test/data_structures/segment_tree_lazy/range_add_range_min
       - run:
           name: K-Query (data_structures/segment_tree_persistent)
-          command: python2 .circleci/run_tests.py test/data_structures/segment_tree_persistent/k-query
+          command: python .circleci/run_tests.py test/data_structures/segment_tree_persistent/k-query
       - run:
           name: Deda (data_structures/segment_tree_searchable)
-          command: python2 .circleci/run_tests.py test/data_structures/segment_tree_searchable/deda
+          command: python .circleci/run_tests.py test/data_structures/segment_tree_searchable/deda
       - run:
           name: Static RMQ (data_structures/sparse_table)
-          command: python2 .circleci/run_tests.py test/data_structures/sparse_table/static_rmq
+          command: python .circleci/run_tests.py test/data_structures/sparse_table/static_rmq
       - run:
           name: Duff is Mad (data_structures/sqrt_decomposition_point_query)
-          command: python2 .circleci/run_tests.py test/data_structures/sqrt_decomposition_point_query/duff_is_mad
+          command: python .circleci/run_tests.py test/data_structures/sqrt_decomposition_point_query/duff_is_mad
       - run:
           name: Escape Through Leaf (data_structures/line_container)
-          command: python2 .circleci/run_tests.py test/data_structures/line_container/escape_through_leaf
+          command: python .circleci/run_tests.py test/data_structures/line_container/escape_through_leaf
       - run:
           name: The Fair Nut and Rectangles (data_structures/line_container_monotonic)
-          command: python2 .circleci/run_tests.py test/data_structures/line_container_monotonic/the_fair_nut_and_rectangles
+          command: python .circleci/run_tests.py test/data_structures/line_container_monotonic/the_fair_nut_and_rectangles
       - run:
           name: Cats Transport (data_structures/line_container_monotonic)
-          command: python2 .circleci/run_tests.py test/data_structures/line_container_monotonic/cats_transport
+          command: python .circleci/run_tests.py test/data_structures/line_container_monotonic/cats_transport
       - run:
           name: String Set Queries (data_structures/static_to_dynamic_transformation)
-          command: python2 .circleci/run_tests.py test/data_structures/static_to_dynamic_transformation/string_set_queries
+          command: python .circleci/run_tests.py test/data_structures/static_to_dynamic_transformation/string_set_queries
 
       # GRAPHS
       - run:
           name: Weighted Tree Diameter (graphs)
-          command: python2 .circleci/run_tests.py test/graphs/tree/weighted_tree_diameter
+          command: python .circleci/run_tests.py test/graphs/tree/weighted_tree_diameter
       - run:
           name: Lowest Common Ancestor (graphs/lowest_common_ancestor)
-          command: python2 .circleci/run_tests.py test/graphs/lowest_common_ancestor/lowest_common_ancestor
+          command: python .circleci/run_tests.py test/graphs/lowest_common_ancestor/lowest_common_ancestor
       - run:
           name: Vertex Add Path Sum (graphs/heavy_path_decomposition, data_structures/binary_indexed_tree)
-          command: python2 .circleci/run_tests.py test/graphs/heavy_path_decomposition/vertex_add_path_sum
+          command: python .circleci/run_tests.py test/graphs/heavy_path_decomposition/vertex_add_path_sum
       - run:
           name: Shortest Path (graphs/dijkstra)
-          command: python2 .circleci/run_tests.py test/graphs/dijkstra/shortest_path
+          command: python .circleci/run_tests.py test/graphs/dijkstra/shortest_path
       - run:
           name: Train (graphs/dijkstra)
-          command: python2 .circleci/run_tests.py test/graphs/dijkstra/train
+          command: python .circleci/run_tests.py test/graphs/dijkstra/train
       - run:
           name: Two Sat (graphs/two_sat)
-          command: python2 .circleci/run_tests.py test/graphs/two_sat/two_sat
+          command: python .circleci/run_tests.py test/graphs/two_sat/two_sat
 
       # MISC
       - run:
           name: PolandBall And Gifts (misc/subset_sum)
-          command: python2 .circleci/run_tests.py test/misc/subset_sum/polandball_and_gifts
+          command: python .circleci/run_tests.py test/misc/subset_sum/polandball_and_gifts
       - run:
           name: Range Set Query (misc/count_distinct_in_range)
-          command: python2 .circleci/run_tests.py test/misc/count_distinct_in_range/range_set_query
+          command: python .circleci/run_tests.py test/misc/count_distinct_in_range/range_set_query
       - run:
           name: Army Creation (misc/count_distinct_in_range)
-          command: python2 .circleci/run_tests.py test/misc/count_distinct_in_range/army_creation
+          command: python .circleci/run_tests.py test/misc/count_distinct_in_range/army_creation
 
       # NUMERIC
       - run:
           name: Exponentiation (numeric/modnum)
-          command: python2 .circleci/run_tests.py test/numeric/modnum/exponentiation
+          command: python .circleci/run_tests.py test/numeric/modnum/exponentiation
       - run:
           name: Convolution Mod 998244353 (numeric/ntt)
-          command: python2 .circleci/run_tests.py test/numeric/ntt/convolution_mod_998244353
+          command: python .circleci/run_tests.py test/numeric/ntt/convolution_mod_998244353
       - run:
           name: Convolution Mod 1000000007 (numeric/complex_fft)
-          command: python2 .circleci/run_tests.py test/numeric/complex_fft/convolution_mod_1000000007
+          command: python .circleci/run_tests.py test/numeric/complex_fft/convolution_mod_1000000007
       - run:
           name: Discrete Logarithm (numeric/discrete_logarithm)
-          command: python2 .circleci/run_tests.py test/numeric/discrete_logarithm/discrete_logarithm
+          command: python .circleci/run_tests.py test/numeric/discrete_logarithm/discrete_logarithm
       - run:
           name: Sqrt Mod (numeric/tonelli-shanks)
-          command: python2 .circleci/run_tests.py test/numeric/tonelli-shanks/sqrt_mod
+          command: python .circleci/run_tests.py test/numeric/tonelli-shanks/sqrt_mod
       - run:
           name: The Classic Problem (numeric/bignum_addpow2_compare)
-          command: python2 .circleci/run_tests.py test/numeric/bignum_addpow2_compare/the_classic_problem
+          command: python .circleci/run_tests.py test/numeric/bignum_addpow2_compare/the_classic_problem
 
       # STRINGS
       - run:
           name: Pattern Find (strings/knuth_morris_pratt)
-          command: python2 .circleci/run_tests.py test/strings/knuth_morris_pratt/pattern_find
+          command: python .circleci/run_tests.py test/strings/knuth_morris_pratt/pattern_find
       - run:
           name: Z Algorithm (strings/z_algorithm)
-          command: python2 .circleci/run_tests.py test/strings/z_algorithm/z_algorithm
+          command: python .circleci/run_tests.py test/strings/z_algorithm/z_algorithm
       - run:
           name: Enumerate Palindromes (strings/palindromes)
-          command: python2 .circleci/run_tests.py test/strings/palindromes/enumerate_palindromes
+          command: python .circleci/run_tests.py test/strings/palindromes/enumerate_palindromes
       - run:
           name: Good Substrings (strings/polynomial_hash)
-          command: python2 .circleci/run_tests.py test/strings/polynomial_hash/good_substrings
+          command: python .circleci/run_tests.py test/strings/polynomial_hash/good_substrings
       - run:
           name: Suffix Array (strings/suffix_array)
-          command: python2 .circleci/run_tests.py test/strings/suffix_array/suffix_array
+          command: python .circleci/run_tests.py test/strings/suffix_array/suffix_array
       - run:
           name: Count Distinct Substrings (strings/suffix_array)
-          command: python2 .circleci/run_tests.py test/strings/suffix_array/count_distinct_substrings
+          command: python .circleci/run_tests.py test/strings/suffix_array/count_distinct_substrings
       - run:
           name: Count Distinct Substrings (strings/suffix_automaton)
-          command: python2 .circleci/run_tests.py test/strings/suffix_automaton/count_distinct_substrings
+          command: python .circleci/run_tests.py test/strings/suffix_automaton/count_distinct_substrings
       - run:
           name: Minimum Length Substring With K Occurrences (strings/trie)
-          command: python2 .circleci/run_tests.py test/strings/trie/minimum_length_substring_with_k_occurrences
+          command: python .circleci/run_tests.py test/strings/trie/minimum_length_substring_with_k_occurrences
       - run:
           name: Count Matches in Mutable Text (strings/mutable_string)
-          command: python2 .circleci/run_tests.py test/strings/mutable_string/count_matches_in_mutable_text
+          command: python .circleci/run_tests.py test/strings/mutable_string/count_matches_in_mutable_text
       - run:
           name: Count Matches in Mutable Text (strings/mutable_string_bitset)
-          command: python2 .circleci/run_tests.py test/strings/mutable_string_bitset/count_matches_in_mutable_text
+          command: python .circleci/run_tests.py test/strings/mutable_string_bitset/count_matches_in_mutable_text
 
 workflows:
   main:

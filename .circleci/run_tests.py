@@ -25,7 +25,7 @@ def run_tests(infile, clib_root):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "Path to source file expected as argument"
+        print("Path to source file expected as argument")
         exit(1)
 
     clib_root = "~/clib/"

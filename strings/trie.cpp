@@ -2,6 +2,7 @@
 #include <vector>
 #include <cassert>
 #include <queue>
+#include <cstdint>
 
 template<int MIN_CHAR, int SIGMA>
 struct trie {

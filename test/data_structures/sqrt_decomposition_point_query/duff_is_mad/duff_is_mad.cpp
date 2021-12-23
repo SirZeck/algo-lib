@@ -1,5 +1,6 @@
 // Problem: https://codeforces.com/problemset/problem/587/F
 
+#include <cstdint>
 #include <iostream>
 #include <vector>
 #include <string>

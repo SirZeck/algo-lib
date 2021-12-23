@@ -49,7 +49,7 @@ def expand(infile, outfile, clib_root = "~/clib/"):
                 appended = True
 
         if not appended:
-            print "Encountered a cyclic dependency!"
+            print("Encountered a cyclic dependency!")
             exit(1)
 
     with open(outfile, 'w') as outf:
@@ -59,11 +59,11 @@ def expand(infile, outfile, clib_root = "~/clib/"):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "Path to source file expected as argument"
+        print("Path to source file expected as argument")
         exit(1)
 
     if len(sys.argv) < 3:
-        print "Output filepath expected as argument"
+        print("Output filepath expected as argument")
         exit(1)
 
     clib_root = "~/clib/"

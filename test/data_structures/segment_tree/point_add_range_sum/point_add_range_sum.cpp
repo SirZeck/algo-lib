@@ -1,5 +1,6 @@
 // Problem: https://judge.yosupo.jp/problem/point_add_range_sum
 
+#include <cstdio>
 #include <functional>
 
 // {{{ data_structures/segment_tree.cpp }}}
