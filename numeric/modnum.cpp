@@ -44,6 +44,10 @@ template<v_t MOD> struct modnum {
     friend modnum operator + (const modnum& a, const modnum& b) { return modnum(a) += b; }
     friend modnum operator - (const modnum& a, const modnum& b) { return modnum(a) -= b; }
     friend modnum operator * (const modnum& a, const modnum& b) { return modnum(a) *= b; }
+    modnum& operator ++ () { return *this += 1; }
+    modnum& operator -- () { return *this -= 1; }
+    modnum operator ++ (int) { auto old = *this; operator++(); return old; }
+    modnum operator -- (int) { auto old = *this; operator--(); return old; }
 
     modnum pow(vv_t e) const {
         if (e < 0) return 1 / this->pow(-e);
